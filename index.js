@@ -7,11 +7,7 @@ import router from './routes/auth.routes.js';
 dotenv.config();
 const app = express();
 app.use(
-  cors({
-    origin:
-      'https://stackblitzstartersq5pyvyoz-monp--3000--b894c784.local-credentialless.webcontainer.io',
-    credentials: true,
-  })
+  cors()
 );
 
 app.use(express.json());
