@@ -8,7 +8,12 @@ import cookieParser from 'cookie-parser'
 dotenv.config();
 const app = express();
 app.use(
-  cors()
+  cors(
+    {
+      origin:'https://stackblitzstartersq5pyvyoz-monp--3000--b894c784.local-credentialless.webcontainer.io',
+      credentials:true
+    }
+  )
 );
 app.use(cookieParser())
 app.use(express.json());
