@@ -3,13 +3,14 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectToDB from './config/db.js';
 import router from './routes/auth.routes.js';
+import cookieParser from 'cookie-parser'
 
 dotenv.config();
 const app = express();
 app.use(
   cors()
 );
-
+app.use(cookieParser())
 app.use(express.json());
 app.use('/feeds', router);
 const PORT = process.env.PORT || 5000
