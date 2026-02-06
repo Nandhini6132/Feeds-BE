@@ -8,28 +8,29 @@ import cookieParser from 'cookie-parser'
 
 dotenv.config();
 const app = express();
-const allowedOrigins = [
-  /^https:\/\/.*\.local-credentialless\.webcontainer\.io$/,
-];
+app.use(cors('https://feeds-fe.onrender.com'))
+// const allowedOrigins = [
+//   /^https:\/\/.*\.local-credentialless\.webcontainer\.io$/,
+// ];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true); // Postman / server-to-server
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true); // Postman / server-to-server
 
-      const isAllowed = allowedOrigins.some((regex) =>
-        regex.test(origin)
-      );
+//       const isAllowed = allowedOrigins.some((regex) =>
+//         regex.test(origin)
+//       );
 
-      if (isAllowed) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
-);
+//       if (isAllowed) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
 
 app.use(cookieParser())
 app.use(express.json());
