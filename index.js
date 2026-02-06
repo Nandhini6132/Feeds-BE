@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser'
 
 dotenv.config();
 const app = express();
-app.use(cors('https://feeds-fe.onrender.com'))
+app.use(cors({origin:'https://feeds-fe.onrender.com', credentials:true}))
 // const allowedOrigins = [
 //   /^https:\/\/.*\.local-credentialless\.webcontainer\.io$/,
 // ];
