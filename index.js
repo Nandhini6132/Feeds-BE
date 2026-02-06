@@ -5,16 +5,32 @@ import connectToDB from './config/db.js';
 import router from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser'
 
+
 dotenv.config();
 const app = express();
+const allowedOrigins = [
+  /^https:\/\/.*\.local-credentialless\.webcontainer\.io$/,
+];
+
 app.use(
-  cors(
-    {
-      origin:'https://stackblitzstartersq5pyvyoz-monp--3000--b894c784.local-credentialless.webcontainer.io',
-      credentials:true
-    }
-  )
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // Postman / server-to-server
+
+      const isAllowed = allowedOrigins.some((regex) =>
+        regex.test(origin)
+      );
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
 );
+
 app.use(cookieParser())
 app.use(express.json());
 app.use('/feeds', router);
